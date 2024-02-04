@@ -94,10 +94,10 @@ const handleLogin = async (req, res) => {
 			reason: 'email/phone or password không đúng',
 		});
 	}
-	// const hashPassword = checkLogin[0].password;
-	// const comparePass = await bcrypt.compare(password, hashPassword);
-	// console.log(comparePass,password, hashPassword)
-	// if (comparePass) {
+	const hashPassword = checkLogin[0].password;
+	const comparePass = await bcrypt.compare(password, hashPassword);
+	console.log(comparePass,password, hashPassword)
+	if (comparePass) {
 		const token = CreatJWT({
 			id: checkLogin[0]._id.toString(),
 			username: checkLogin[0].username,
@@ -115,12 +115,12 @@ const handleLogin = async (req, res) => {
 			token: token,
 			data: checkLogin,
 		});
-	// } else {
-	// 	return res.status(200).json({
-	// 		status: 'fail',
-	// 		reason: 'email/phone or password không đúng',
-	// 	});
-	// }
+	} else {
+		return res.status(200).json({
+			status: 'fail',
+			reason: 'email/phone or password không đúng',
+		});
+	}
 };
 
 const handleUpdate = async (req, res) => {
